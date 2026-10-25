@@ -1,0 +1,19 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cypress_rwa_dev
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+    volumes:
+      # Sincronizo mis cambios de código en tiempo real
+      - .:/app
+      # Aíslo node_modules dentro de Linux (evita conflictos con Windows)
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    stdin_open: true
+    tty: true
